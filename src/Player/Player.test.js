@@ -1,10 +1,8 @@
 import Player from "./Player";
-import Ship from "../Ship/Ship";
 
 describe('Real user plays a move', () => {
     const p = new Player('real');
-    const s = new Ship(2);
-    p.board.placeShip(s, [[0, 0], [0, 1]]);
+    p.board.placeShip([[0, 0], [0, 1]]);
     test('Real user hits a ship, board updates', () => {
         p.attack([0, 0]);
         let ship = p.board.board[0][0].ship;

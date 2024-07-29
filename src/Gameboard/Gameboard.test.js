@@ -1,5 +1,4 @@
 import Gameboard from "./Gameboard";
-import Ship from "../Ship/Ship";
 
 describe('Gameboard board', () => {
     const g = new Gameboard();
@@ -15,14 +14,13 @@ describe('Add ship to board', () => {
     const g = new Gameboard();
 
     test('For coordinates corresponding to board cell, ship in each cell is the same ship object', () => {
-        let coordinates = [[0, 0], [0, 1], [0, 2]];
-        const s = new Ship(coordinates.length);
-        g.placeShip(s, coordinates);
+        let coordinates = [[0, 0], [0, 1]];
+        let s = g.board[0][0].ship;
 
-        expect(coordinates.every(([row, col]) => (
-            g.board[row][col].ship === s
-        ))).toBeTruthy();
-        expect(g.board[1][1].ship === s).toBeFalsy();
+        g.placeShip(coordinates);
+
+        expect(g.board[0][0].ship === g.board[0][1].ship).toBeTruthy();
+        expect(g.board[1][1].ship === g.board[0][0].ship).toBeFalsy();
     })
 })
 
@@ -30,8 +28,7 @@ describe('Receive attack', () => {
     const g = new Gameboard();
 
     let coordinates = [[0, 0], [0, 1], [0, 2]];
-    const s = new Ship(coordinates.length);
-    g.placeShip(s, coordinates);
+    g.placeShip(coordinates);
 
     test('Cell being attacked sets visited = true', () => {
         g.receiveAttack([5, 5]);
@@ -40,7 +37,8 @@ describe('Receive attack', () => {
 
     test('Attack hits ship, ship increases hit count by 1', () => {
         g.receiveAttack([0, 0]);
-        expect(s.numHits).toBe(1);
+        let ship = g.board[0][0].ship;
+        expect(ship.numHits).toBe(1);
     })
 
     test('Attack sinks ship, ships sunk increases by 1', () => {
