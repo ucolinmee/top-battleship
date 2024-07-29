@@ -2,12 +2,12 @@ import Gameboard from "../Gameboard/Gameboard"
 
 export default class Player {
     constructor(type) {
-        this.type = type // 'real' or 'computer' players
+        this.type = type // 'human' or 'bot' players
         this.board = new Gameboard();
     }
 
     attack(move=null) {
-        if (this.type == 'computer') {
+        if (this.type == 'bot') {
             move = this.getRandomMove();
         }
         this.board.receiveAttack(move);

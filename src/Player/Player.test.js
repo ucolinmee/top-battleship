@@ -1,7 +1,7 @@
 import Player from "./Player";
 
 describe('Real user plays a move', () => {
-    const p = new Player('real');
+    const p = new Player('human');
     p.board.placeShip([[0, 0], [0, 1]]);
     test('Real user hits a ship, board updates', () => {
         p.attack([0, 0]);
@@ -17,7 +17,7 @@ describe('Real user plays a move', () => {
 })
 
 describe('Computer plays a move', () => {
-    const c = new Player('computer');
+    const c = new Player('bot');
 
     test('Get random move returns a valid move', () => {
         let move = c.getRandomMove();
