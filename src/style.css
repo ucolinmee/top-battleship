@@ -55,6 +55,18 @@ Battlefield
     border: 1px solid dodgerblue;
 }
 
+.hit {
+    background-image: url('images/red-x.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    float: left;
+    width: auto;
+}
+
+.miss {
+    background-color: #78C2FF;
+}
+
 .board-label {
     font-size: 1.5rem;
     color: #FFF;
@@ -65,3 +77,4 @@ Battlefield
     cursor: pointer;
     background-color: red;
 }
+

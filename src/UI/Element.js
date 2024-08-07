@@ -60,4 +60,11 @@ export default class Element {
         }
         return this;
     }
+
+    removeEventListener(event, callbackFn) {
+        if (this.eventListeners[event].includes(callbackFn)) {
+            this.eventListeners[event].splice(this.eventListeners[event].indexOf(callbackFn), 1);
+        }
+        return this;
+    }
 }
