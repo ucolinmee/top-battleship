@@ -1,20 +1,36 @@
-import { user, bot } from "./main";
-import { loadScreen } from "./UI/Screen";
+import { user, bot } from "./GameLogic";
+import { loadScreen, disableButton, displayGameOver } from "./UI/Screen";
 
-// const human = new Player('human');
-// const bot = new Player('bot');
 
 export const toggleHoveredClass = (e) => {
     e.target.classList.toggle('hovered');
 }
 
 export const handleAttack = (e) => {
+    disableButton();
     const col = e.target.getAttribute('data-x');
     const row = e.target.getAttribute('data-y');
     if (e.target.parentNode.id == 'bot-board') {
-        bot.board.board[row][col].visited = true;
+        bot.board.receiveAttack([row, col]);
     } else {
-        user.board.board[col][row].visited = true
+        user.board.receiveAttack([row, col]);
+    }
+    if (isGameOver(user)) {
+        displayGameOver(user);
+    } else if (isGameOver(bot)) {
+        displayGameOver(bot);
     }
     loadScreen();
+}
+
+export const handleReset = () => {
+    location.reload();
+}
+
+const isGameOver = (player) => {
+    if (player.board.allShipsSunk()) {
+        displayGameOver(player)
+        return true;
+    }
+    return false
 }

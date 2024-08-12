@@ -1,6 +1,21 @@
 import Element from "./Element";
-import { toggleHoveredClass, handleAttack } from "../DOM";
-import { user, bot } from "../main";
+import { toggleHoveredClass, handleAttack, handleReset } from "../DOM";
+import { user, bot } from "../GameLogic";
+
+let gameStarted = false;
+
+export const disableButton = () => {
+    gameStarted = true;
+}
+
+export const displayGameOver = (player) => {
+    const feedback = document.getElementById('feedback');
+    if (player.type == 'bot') {
+        feedback.innerHTML = 'You won! Good job!'
+    } else {
+        feedback.innerHTML = 'The enemy beat you first... try again next time.'
+    }
+}
 
 const renderUserBoard = (board) => {
     const boardSection = new Element('section').setAttributes({class: 'board-section'});
@@ -31,12 +46,17 @@ const renderUserBoard = (board) => {
 
     boardSection.addChild(boardHtml);
     boardSection.addChild(new Element('div').setTextContent('You').setAttributes({class: 'board-label'}));
-    boardSection.addChild(new Element('button').setTextContent('Randomize Ships').setAttributes({class: 'random-btn'}));
+
+    const randomShipsBtn = new Element('button').setTextContent('Randomize Ships').appendEventListener('click', handleReset)
+    gameStarted ? randomShipsBtn.setAttributes({class: 'random-btn', disabled: true}) : randomShipsBtn.setAttributes({class: 'random-btn'});
+    boardSection.addChild(randomShipsBtn);
     
     return boardSection.buildElement();
 }
 
 const renderBotBoard = (board) => {
+    const feedback = document.getElementById('feedback');
+
     const boardSection = new Element('section').setAttributes({class: 'board-section'});
 
     const boardHtml = new Element('div').setAttributes({class: 'board', id: 'bot-board'});
@@ -79,4 +99,8 @@ export const loadScreen = () => {
     battlefield.innerHTML = "";
     battlefield.appendChild(renderUserBoard(user.board.board));
     battlefield.appendChild(renderBotBoard(bot.board.board));
+
+    const restart = document.getElementById('restart');
+    restart.innerHTML = "";
+    restart.appendChild(new Element('button').setTextContent('RESTART').appendEventListener('click', handleReset).buildElement());
 }

@@ -24,6 +24,14 @@ Header
     font-weight: bolder;
 }
 
+/* 
+Feedback 
+*/
+#feedback {
+    color: #FFF;
+    font-size: 1.2rem;
+    margin-top: 2rem;
+}
 
 /* 
 Battlefield 
@@ -33,7 +41,7 @@ Battlefield
     display: flex;
     width: 100%;
     justify-content: space-around;
-    margin: 6rem 0;
+    margin: 2rem 0 4rem 0;
 }
 
 .board-section {
@@ -76,5 +84,10 @@ Battlefield
 .hovered {
     cursor: pointer;
     background-color: red;
+}
+
+.random-btn:disabled,
+.random-btn[disabled] {
+    opacity: 0.7;
 }
 
