@@ -1,4 +1,5 @@
 import Ship from "../Ship/Ship";
+import { shipsSunkCoordinates } from "../GameLogic";
 
 export default class Gameboard {
     constructor() {
@@ -26,7 +27,7 @@ export default class Gameboard {
     }
 
     placeShip(coordinates) {
-        const s = new Ship(coordinates.length);
+        const s = new Ship(coordinates.length, coordinates);
         coordinates.forEach(([row, col]) => {
             this.board[row][col].ship = s;
         })
@@ -41,6 +42,7 @@ export default class Gameboard {
             ship.hit();
             if (ship.isSunk()) {
                 this.shipsSunk++;
+                shipsSunkCoordinates.push(ship.coordinates);
             }
         } else {
             this.missedShots.push(JSON.stringify(coordinates));

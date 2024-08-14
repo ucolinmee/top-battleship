@@ -55,6 +55,7 @@ Battlefield
     display: grid;
     grid-template-columns: repeat(10, 1fr);
     grid-template-rows: repeat(10, 1fr);
+    position: relative;
 }
 
 .cell {
@@ -91,3 +92,7 @@ Battlefield
     opacity: 0.7;
 }
 
+.ship {
+    position: absolute;
+    z-index: 10;
+}

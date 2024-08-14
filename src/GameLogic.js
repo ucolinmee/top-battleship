@@ -1,8 +1,10 @@
 import Player from "./Player/Player";
+import { displayShipImg } from "./UI/Screen";
 
 const randomInitialShips = (player) => {
     let directions = ['H', 'V'];
-    let shipsToPlace = [2, 2, 3];
+    let shipsToPlace = [2, 2, 3, 4, 5];
+    let allCoordinates = [];
     
     for (let i = 0; i < shipsToPlace.length; i++) {
         let successfullyPlaced = false;
@@ -27,15 +29,17 @@ const randomInitialShips = (player) => {
             }
             successfullyPlaced = coordinates.length == shipsToPlace[i] ? true : false;
         }
-        console.log(coordinates);
         player.board.placeShip(coordinates);
+        allCoordinates.push(coordinates);
     }
+    return allCoordinates;
 }
 
 let user = new Player('user');
-randomInitialShips(user);
+const userShipCoordinates = randomInitialShips(user);
 
 let bot = new Player('bot');
 randomInitialShips(bot);
+const shipsSunkCoordinates = [];
 
-export {user, bot}
+export {user, bot, userShipCoordinates, shipsSunkCoordinates}

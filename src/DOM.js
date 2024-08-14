@@ -8,8 +8,8 @@ export const toggleHoveredClass = (e) => {
 
 export const handleAttack = (e) => {
     disableButton();
-    const col = e.target.getAttribute('data-x');
-    const row = e.target.getAttribute('data-y');
+    const row = e.target.getAttribute('data-x');
+    const col = e.target.getAttribute('data-y');
     if (e.target.parentNode.id == 'bot-board') {
         bot.board.receiveAttack([row, col]);
     } else {
