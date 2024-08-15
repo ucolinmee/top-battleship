@@ -2,12 +2,15 @@
 
 Welcome to Battleship. This project is an implementation of the classic Battleship game using HTML, CSS and JavaScript. It features both human and bot players, randomized ship placements, and an interactive game board.
 
+Test it out for yourself [here](https://ucolinmee.github.io/top-battleship/)
+
+![screenshot](/src/assets/battleship.png)
+
 ## Features
 
 * Interactive game board 
 * Randomized ship placement
 * Real-time updates for hits, misses, and sunken ships
-* Animated background and audio for shots
 * Play again functionality to reset the game
 
 ## Technologies Used
