@@ -10,17 +10,18 @@ export const handleAttack = (e) => {
     disableButton();
     const row = e.target.getAttribute('data-x');
     const col = e.target.getAttribute('data-y');
-    if (e.target.parentNode.id == 'bot-board') {
-        bot.board.receiveAttack([row, col]);
-    } else {
-        user.board.receiveAttack([row, col]);
-    }
-    if (isGameOver(user)) {
-        displayGameOver(user);
-    } else if (isGameOver(bot)) {
-        displayGameOver(bot);
-    }
+
+    bot.board.receiveAttack([row, col]);
+
+    if (isGameOver(bot)) displayGameOver(bot);
     loadScreen();
+
+    setTimeout(() => {
+        let attackCoords = bot.getRandomMove();
+        user.board.receiveAttack(attackCoords);
+        if (isGameOver(user)) displayGameOver(user);
+        loadScreen();
+    }, 800);
 }
 
 export const handleReset = () => {

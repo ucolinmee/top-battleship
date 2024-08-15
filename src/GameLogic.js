@@ -1,5 +1,4 @@
 import Player from "./Player/Player";
-import { displayShipImg } from "./UI/Screen";
 
 const randomInitialShips = (player) => {
     let directions = ['H', 'V'];
